@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Εφημερεύοντα Φαρμακεία</title>
+    <link rel="icon" type="image/png" href="./images/logo3.png"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lobster&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+ 
+    <header>
+        <section class="header-logo">
+            <h1 id="header-getPharmacies" class="main-header">Get Pharmacies</h1>
+            <img id="image-getPharmacies" class="logo" src="./images/logo3.png" alt="GetPharmacies logo">
+        </section>
+        <nav>
+            <ul id="header-links">
+                <li id="about-page">About</li>
+                <li>
+                    <select name="language" id="language-selector">
+                    <option value="english" id="en-language" selected>EN</option>
+                    <option value="greek" id="gr-language">GR</option>
+                    </select>
+                </li>   
+            </ul>
+       </nav>
+        
+    </header>
+    
+    <main>
+        <section class="description">
+            <p id="intro-message" class="intros"><span class = "font-change">Get Pharmacies</span> is an app that helps you find the pharmacy you need at any time of the day </p>
+        </section> 
+
+        <section id="smap" class="map-sector">
+                <select id="location-selection">
+                    <option value="0" id="not">Choose Location</option>
+                    <option value="1" id="Agioi-Anargyroi">ΑΓ.ΑΝΑΡΓΥΡΟΙ</option>
+                    <option value="2" id="Agia-Varvara">ΑΓ.ΒΑΡΒΑΡΑ</option>
+                    <option value="3" id="Agios-Demetrios">ΑΓ.ΔΗΜΗΤΡΙΟΣ</option>
+                    <option value="4" id="Agiou-Meletiou">ΑΓ.ΜΕΛΕΤΙΟΥ</option>
+                    <option value="5" id="Agia-Paraskeue">ΑΓ.ΠΑΡΑΣΚΕΥΗ</option>
+                    <option value="6" id="Agios-Stefanos">ΑΓ.ΣΤΕΦΑΝΟΣ</option>
+                    <option value="7" id="Egaleo">ΑΙΓΑΛΕΩ</option>
+                    <option value="8" id="Alimos">ΑΛΙΜΟΣ</option>
+                    <option value="9" id="Ampelokipoi">ΑΜΠΕΛΟΚΗΠΟΙ</option>
+                    <option value="10" id="Ano-Liosia">ΑΝΩ ΛΙΟΣΙΑ</option>
+                    <option value="11" id="Argyroupoli">ΑΡΓΥΡΟΥΠΟΛΗ</option>
+                    <option value="12" id="Artemida">ΑΡΤΕΜΙΔΑ</option>
+                    <option value="13" id="Aspropyrgos">ΑΣΠΡΟΠΥΡΓΟΣ</option>
+                    <option value="14" id="Acharnes">ΑΧΑΡΝΑΙ</option>
+                    <option value="15" id="Varkiza">ΒΑΡΚΙΖΑ</option>
+                    <option value="16" id="Voula">ΒΟΥΛΑ</option>
+                    <option value="17" id="Vouliagmeni">ΒΟΥΛΙΑΓΜΕΝΗ</option>
+                    <option value="18" id="Vironas">ΒΥΡΩΝΑΣ</option>
+                    <option value="19" id="Galatsi">ΓΑΛΑΤΣΙ</option>
+                    <option value="20" id="Gerakas">ΓΕΡΑΚΑΣ</option>
+                    <option value="21" id="Glyfada">ΓΛΥΦΑΔΑ</option>
+                    <option value="22" id="Goudi">ΓΟΥΔΗ</option>
+                    <option value="23" id="Ilioupoli">ΗΛΙΟΥΠΟΛΗ</option>
+                    <option value="24" id="Ilion">ΙΛΙΟΝ</option>
+                    <option value="25" id="Kallithea">ΚΑΛΛΙΘΕΑ</option>
+                    <option value="26" id="Kolonaki">ΚΟΛΩΝΑΚΙ</option>
+                    <option value="27" id="Koropi">ΚΟΡΩΠΙ</option>
+                    <option value="28" id="Marousi">ΜΑΡΟΥΣΙ</option>
+                    <option value="29" id="Peristeri">ΠΕΡΙΣΤΕΡΙ</option>
+                    <option value="30" id="Sepolia">ΣΕΠΟΛΙΑ</option>
+                    <option value="31" id="Chalandri">ΧΑΛΑΝΔΡΙ</option>
+
+                </select>
+            <div id="addresses"></div>
+            <div id="map"></div>
+            
+        </section>
+        <div id="pop-up">
+            <div id="feature-name"></div>
+            <div id="feature-address"></div>
+            <div id="feature-schedule"></div>
+            <div id="feature-phone"></div>
+        </div>
+    </main>
+
+    <footer class="footer-front">
+       (FE: <a href="https://github.com/vasokaloutsa" target="_blank">Vaso</a>  BE: <a href="https://github.com/pkakelas" target="_blank">Dimitris</a>)
+    </footer>
+
+    <script src="./index.js" ></script>  
+</body>
+</html>
