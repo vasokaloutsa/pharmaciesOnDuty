@@ -49,7 +49,7 @@ else {
 }
 
 //Fetch pharmacies on duty by Dimitri's API 
-fetch('http://pkakelas.com:8080/')
+fetch('https://pkakelas.com/pharmacies')
   .then(response => response.json())
   .then(data => {
         pharmaciesOnDuty = data.Pharmacies
