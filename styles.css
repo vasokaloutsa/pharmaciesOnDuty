@@ -29,10 +29,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
     background-color: rgba(187, 242, 223, 0.193);
-    /* background-image:url('https://wallpaperaccess.com/full/1567666.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; */
 }
 
 .display-empty {
@@ -54,11 +50,9 @@ header {
 
 .logo {
     animation-name: fade-image;
-    /* animation-delay:0.3s; */
     animation-duration: 2.5s;
     animation-fill-mode: forwards;
     margin-top: 30px;
-    /* width:70px;  */
 }
 
 
@@ -136,15 +130,6 @@ li:hover,select:hover {
 
 
 /*------ Main content styles ------*/
-/* #intro-message{
-    margin: 0 auto;
-    text-align: center;
-    background-color: rgba(250, 235, 215, 0.858);
-    width: 60%;
-    margin-top: 3%;
-    padding: 2%;
-  } */
-
 .intros {
     margin: 0 auto;
     text-align: center;
