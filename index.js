@@ -224,7 +224,7 @@ function showAbout() {
     rmvBtn.style.cssText = "font-family: 'Pacifico',cursive,sans-serif;border: none; background-color: transparent;color: rgb(85, 146, 252); float: right;"
     
     if (lang === "english") {
-        introParagraph.innerHTML = "Get Pharmacies is an app that helps you to find the pharmacy on duty you need"
+        introParagraph.innerHTML = "Get Pharmacies is an app that helps you find the pharmacy on duty you need"
         introParagraph.appendChild(rmvBtn)
         introParagraph.classList.remove("display-empty")
     } else {
