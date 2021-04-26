@@ -194,7 +194,7 @@ function makeMarker(mapLocal, long, lat , scaleOption, imgPath, pharmacies) {
     marker.setStyle(
         new ol.style.Style({
             image: new ol.style.Icon({
-                anchor: [0, 0],
+                anchor: [0.5, 0.5],
                 scale: scaleOption,
                 src: imgPath
             })
