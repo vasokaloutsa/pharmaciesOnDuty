@@ -3,7 +3,7 @@
 let arrayOfMarkers = []
 let map
 let lang = "english"
-let loct = {} 
+let located = {} 
 let longitude
 let latitude
 let pharmaciesOnDuty
@@ -32,13 +32,13 @@ setTimeout(getIntroMessage,3000)
 
 //Geologation WEB-API
 if (navigator.geolocation) {
-    function success(position){
+    function success(position) {
         longitude = position.coords.longitude;
         latitude = position.coords.latitude;
         showOnMap(longitude,latitude);  
     }
 
-    function failure(response){
+    function failure(response) {
         console.log("Geolocation Failed", response);
     }
     //navigator.geolocation.watchPosition( success, failure );  //this creates new map every time I change my Position-needs to be fixed
@@ -59,32 +59,32 @@ fetch('https://pkakelas.com/pharmacies')
 
 
 //event listener for displaying markers based on location
-locations.addEventListener("change", (e)=>{
-    loct = {
-        mun: document.getElementById("location-selection").options[e.target.value].text,
-        geocMun: document.getElementById("location-selection").options[e.target.value].id
+locations.addEventListener("change", (e)=> {
+    let located = {
+        municipality: document.getElementById("location-selection").options[e.target.value].text,
+        geocMunicipality: document.getElementById("location-selection").options[e.target.value].id
     }
-    let filteredPharmacies = pharmaciesOnDuty.filter(pharm => (pharm.municipality === loct.mun))
-    filteredPharmacies.forEach(pharmacy=> pharmacy.municipality = loct.geocMun.replace("-", " "))  //necessary to change to right geocoding coordinates the greek name
+    let filteredPharmacies = pharmaciesOnDuty.filter(pharm => (pharm.municipality === located.municipality))
+    filteredPharmacies.forEach(pharmacy=> pharmacy.municipality = located.geocMunicipality.replace("-", " "))  //necessary to change to right geocoding coordinates the greek name
        
-    if (filteredPharmacies.length <=2) {
-        filteredPharmacies.forEach((far)=>{
-            geocode(far)
+    if (filteredPharmacies.length <= 2) {
+        filteredPharmacies.forEach((pharmacy)=> {
+            geocode(pharmacy)
             let pharmTable = document.createElement("div")
-            pharmTable.innerHTML = `${JSON.stringify(far.municipality)}: ${JSON.stringify(far.address)} - ${JSON.stringify(far.brand)} - ${JSON.stringify(far.schedule)}`
+            pharmTable.innerHTML = `${JSON.stringify(pharmacy.municipality)}: ${JSON.stringify(pharmacy.address)} - ${JSON.stringify(pharmacy.brand)} - ${JSON.stringify(pharmacy.schedule)}`
             pharmTable.style.cssText="text-align:center; margin: 0 auto;border: 1px solid black;border-radius: 5px; background-color: transparent; width: 60%;margin-top: 5px"
             mapSector.appendChild(pharmTable)
         }) 
-    } else {
-        filteredPharmacies.forEach((far,idx)=>{
-            getMarkers(far,idx)  //setTimeout browser problem?
+    } 
+    else {
+        filteredPharmacies.forEach((pharmacy,idx)=> {
+            getMarkers(pharmacy,idx)  //setTimeout browser problem?
             let pharmTable = document.createElement("div")
-            pharmTable.innerHTML = `${JSON.stringify(far.municipality)}: ${JSON.stringify(far.address)} - ${JSON.stringify(far.brand)} - ${JSON.stringify(far.schedule)}`
+            pharmTable.innerHTML = `${JSON.stringify(pharmacy.municipality)}: ${JSON.stringify(pharmacy.address)} - ${JSON.stringify(pharmacy.brand)} - ${JSON.stringify(pharmacy.schedule)}`
             pharmTable.style.cssText="text-align:center; margin: 0 auto;border: 1px solid black;border-radius: 5px; background-color: transparent; width: 60%;margin-top: 5px"
             mapSector.appendChild(pharmTable)
         }) 
-    }
-    
+    }   
 })
     
 
@@ -110,7 +110,7 @@ async function getMarkers(pharmacies,idx) {
 }
 
 //show Map
-function showOnMap(longitude,latitude){
+function showOnMap(longitude,latitude) {
     mapSector.classList.remove("loading")
     locations.classList.remove("display-empty")
     locations.classList.add("locations")
@@ -128,19 +128,19 @@ function showOnMap(longitude,latitude){
             center: ol.proj.fromLonLat([longitude, latitude]),
             zoom: 10
         })
-    });
+    })
 
     //Marker of me (my geolocation)
     let me = {
         brand: "",
-        schedule:"",
-        phone:"",
-        address:"My position"
+        schedule: "",
+        phone: "",
+        address: "My position",
+        municipality: ":)"
     }
     makeMarker(map,longitude, latitude, 0.05,'./images/personMarker.png',me) 
     
     //pop up of markers
-
     const overlayContainer = document.getElementById("pop-up")
     const overlayLayer = new ol.Overlay ({
         element: overlayContainer
@@ -153,9 +153,9 @@ function showOnMap(longitude,latitude){
     const overlayPhone = document.getElementById("feature-phone")
     const overlayLocation = document.getElementById("feature-address")
 
-    map.on('click',(e)=>{
+    map.on('click',(e)=> {
         overlayLayer.setPosition(undefined)
-        map.forEachFeatureAtPixel(e.pixel,function(feature){
+        map.forEachFeatureAtPixel(e.pixel,function(feature) {
             let clickedCoordinate = e.coordinate
             let clickedFeatureName = feature.get('name')
             let clickedFeatureSchedule = feature.get('schedule')
@@ -169,10 +169,8 @@ function showOnMap(longitude,latitude){
             overlayLocation.innerHTML = `<span class="pop-titles">Location</span>: ${clickedFeatureAddress} (${clickedFeatureMunicipality})`
         })
     })
-
     return map
 }
-
 
 //create markers 
 function makeMarker(mapLocal, long, lat , scaleOption, imgPath, pharmacies) {
@@ -189,7 +187,7 @@ function makeMarker(mapLocal, long, lat , scaleOption, imgPath, pharmacies) {
                 })
             ]
         })
-    });
+    })
 
     marker.setStyle(
         new ol.style.Style({
@@ -201,20 +199,20 @@ function makeMarker(mapLocal, long, lat , scaleOption, imgPath, pharmacies) {
         })
     )
     
-    mapLocal.addLayer(marker);
+    mapLocal.addLayer(marker)
 
-    return marker;
+    return marker
 }
 
 //-----------------------------------------------------
 
 
 // ------------About section -------------------------
-languages.addEventListener("change",(e)=>{
+languages.addEventListener("change",(e)=> {
     lang = e.target.value
     showAbout()
 })
-aboutPage.addEventListener("click",()=>{showAbout()})
+aboutPage.addEventListener("click",()=> {showAbout()})
 
 
 function showAbout() {
