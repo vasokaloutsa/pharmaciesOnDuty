@@ -35,6 +35,10 @@ body {
     display: none;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 /*-----Header Styles-------*/
 
 header {
@@ -155,7 +159,7 @@ li:hover,select:hover {
     border:2px solid rgba(201, 198, 198,0.4);
 }
 
-.loading{
+.loading {
   margin: 0 auto;
   margin-top: 200px;
   border: 16px solid #f3f3f3; /* Light grey */
@@ -171,7 +175,7 @@ li:hover,select:hover {
     100% { transform: rotate(360deg); }
 }
 
-#aboutPage{
+#aboutPage {
     text-align: center;
 }
 
@@ -189,7 +193,7 @@ li:hover,select:hover {
 }
 
 /*footer*/
-.footer-front{
+footer {
     background-color:rgba(201, 198, 198,0.4);
     margin-top : 100px;
     color:rgba(93, 99, 97, 0.892);

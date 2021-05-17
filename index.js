@@ -7,6 +7,7 @@ let located = {}
 let longitude
 let latitude
 let pharmaciesOnDuty
+let locationsBtn
 
 // DOM elements
 const mapSector = document.getElementById("smap")
@@ -66,25 +67,47 @@ locations.addEventListener("change", (e)=> {
     }
     let filteredPharmacies = pharmaciesOnDuty.filter(pharm => (pharm.municipality === located.municipality))
     filteredPharmacies.forEach(pharmacy=> pharmacy.municipality = located.geocMunicipality.replace("-", " "))  //necessary to change to right geocoding coordinates the greek name
-       
+  
+    if (!document.getElementById("locations-addresses-btn")) {
+        locationsBtn = document.createElement("button")
+        locationsBtn.setAttribute("id","locations-addresses-btn")
+        locationsBtn.innerHTML = "Hide/Show Addresses"
+        locationsBtn.style.cssText = "display:block; margin:0 auto;margin-top: 50px; background-color:transparent;padding:2px;"
+        mapSector.appendChild(locationsBtn) 
+    }
+     
+    
+    let pharmTable
+
     if (filteredPharmacies.length <= 2) {
-        filteredPharmacies.forEach((pharmacy)=> {
-            geocode(pharmacy)
-            let pharmTable = document.createElement("div")
-            pharmTable.innerHTML = `${JSON.stringify(pharmacy.municipality)}: ${JSON.stringify(pharmacy.address)} - ${JSON.stringify(pharmacy.brand)} - ${JSON.stringify(pharmacy.schedule)}`
-            pharmTable.style.cssText="text-align:center; margin: 0 auto;border: 1px solid black;border-radius: 5px; background-color: transparent; width: 60%;margin-top: 5px"
+        filteredPharmacies.forEach((far)=> {
+            geocode(far)
+            pharmTable = document.createElement("div")
+            pharmTable.innerHTML = `${JSON.stringify(far.municipality)}: ${JSON.stringify(far.address)} / ${JSON.stringify(far.brand)} / ${JSON.stringify(far.schedule)}`
+            pharmTable.style.cssText = "text-align:center; margin: 0 auto;border: 1px solid black;border-radius: 5px; background-color: transparent; width: 60%;margin-top: 5px"
+            pharmTable.classList.add("hidden")
+            pharmTable.classList.add("location-addresses")
             mapSector.appendChild(pharmTable)
         }) 
-    } 
-    else {
-        filteredPharmacies.forEach((pharmacy,idx)=> {
-            getMarkers(pharmacy,idx)  //setTimeout browser problem?
-            let pharmTable = document.createElement("div")
-            pharmTable.innerHTML = `${JSON.stringify(pharmacy.municipality)}: ${JSON.stringify(pharmacy.address)} - ${JSON.stringify(pharmacy.brand)} - ${JSON.stringify(pharmacy.schedule)}`
+    } else {
+        filteredPharmacies.forEach((far,idx)=> {
+            getMarkers(far,idx)  //setTimeout browser problem?
+            pharmTable = document.createElement("div")
+            pharmTable.innerHTML = `${JSON.stringify(far.municipality)}: ${JSON.stringify(far.address)} / ${JSON.stringify(far.brand)} / ${JSON.stringify(far.schedule)}`
             pharmTable.style.cssText="text-align:center; margin: 0 auto;border: 1px solid black;border-radius: 5px; background-color: transparent; width: 60%;margin-top: 5px"
+            pharmTable.classList.add("hidden")
+            pharmTable.classList.add("location-addresses")
             mapSector.appendChild(pharmTable)
         }) 
-    }   
+    }
+    let pharmAddresses = document.querySelectorAll(".location-addresses")
+    locationsBtn.addEventListener("click",() => {
+        if (pharmTable.classList.contains("hidden")) {
+            pharmAddresses.forEach((element)=>{element.classList.remove("hidden")}) 
+        } else {
+            pharmAddresses.forEach((element)=>{element.classList.add("hidden")})
+        }
+    })  
 })
     
 
